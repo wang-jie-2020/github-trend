@@ -1,0 +1,22 @@
+[
+  {
+    "source": "trending",
+    "rank": 1,
+    "repo": "owner1/repo1",
+    "url": "https://github.com/owner1/repo1",
+    "summary": "first repo description",
+    "language": "Python",
+    "stars": 1234,
+    "forks": 56
+  },
+  {
+    "source": "trending",
+    "rank": 2,
+    "repo": "owner2/repo2",
+    "url": "https://github.com/owner2/repo2",
+    "summary": "second repo description",
+    "language": "Go",
+    "stars": 987,
+    "forks": 12
+  }
+]

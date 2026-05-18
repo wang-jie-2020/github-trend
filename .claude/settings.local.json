@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -)",
+      "Bash(pytest tests/test_fetch_trending.py tests/test_render_markdown.py -q)",
+      "Bash(python -m pytest tests/test_fetch_trending.py tests/test_render_markdown.py -q)",
+      "Bash(python scripts/fetch_trending.py --top 5 --out /tmp/trending.json)",
+      "Bash(python scripts/fetch_trending.py --top 5 --out trending.json)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(gh workflow *)",
+      "Bash(gh run *)",
+      "Bash(git ls-tree *)",
+      "Bash(git -C \"/d/Code/llm\" rev-parse --show-toplevel)",
+      "Bash(git -C \"/d/Code/llm\" ls-tree -r --name-only HEAD)"
+    ]
+  }
+}
