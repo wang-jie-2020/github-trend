@@ -12,7 +12,14 @@
       "Bash(gh run *)",
       "Bash(git ls-tree *)",
       "Bash(git -C \"/d/Code/llm\" rev-parse --show-toplevel)",
-      "Bash(git -C \"/d/Code/llm\" ls-tree -r --name-only HEAD)"
+      "Bash(git -C \"/d/Code/llm\" ls-tree -r --name-only HEAD)",
+      "Bash(git show *)",
+      "Bash(pytest -q)",
+      "Bash(python -m pytest -q)",
+      "Bash(uv --version)",
+      "Bash(uv lock *)",
+      "Bash(uv sync *)",
+      "Bash(uv run *)"
     ]
   }
 }
