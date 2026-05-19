@@ -5,7 +5,12 @@ from datetime import date, datetime, timezone
 from urllib.parse import quote
 from urllib.request import Request, urlopen
 
-from scripts.render_markdown import render_issue_body
+from dotenv import load_dotenv
+
+try:
+    from scripts.render_markdown import render_issue_body
+except ModuleNotFoundError:
+    from render_markdown import render_issue_body
 
 
 def build_weekly_title(d: date) -> str:
@@ -47,12 +52,14 @@ def create_issue(repo: str, token: str, title: str, body: str):
 
 
 def main():
+    load_dotenv()
+
     parser = argparse.ArgumentParser()
     parser.add_argument("--input", required=True)
     parser.add_argument("--top", type=int, default=20)
     args = parser.parse_args()
 
-    token = os.environ["GITHUB_TOKEN"]
+    token = os.environ["DEPLOY_TOKEN"]
     repo = os.environ["GITHUB_REPOSITORY"]
 
     with open(args.input, "r", encoding="utf-8") as f:

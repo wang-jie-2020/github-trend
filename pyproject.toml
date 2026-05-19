@@ -4,7 +4,9 @@ version = "0.1.0"
 description = "Automate weekly GitHub Trending reports and publish deduplicated GitHub issues"
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+  "python-dotenv>=1.0,<2.0",
+]
 
 [dependency-groups]
 dev = [

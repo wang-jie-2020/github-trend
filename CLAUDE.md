@@ -10,8 +10,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ### Run the weekly pipeline locally
 ```bash
 uv sync --dev
-uv run python scripts/fetch_trending.py --top 20 --out /tmp/trending.json
-GITHUB_TOKEN=<token> GITHUB_REPOSITORY=<owner/repo> uv run python scripts/create_issue.py --input /tmp/trending.json --top 20
+uv run python -m scripts.fetch_trending --top 20 --out /tmp/trending.json
+uv run python -m scripts.create_issue --input /tmp/trending.json --top 20
 ```
 
 ### Run tests
@@ -46,8 +46,9 @@ uv run pytest tests/test_render_markdown.py::test_build_weekly_title_uses_iso_we
   - builds ISO-week title via `build_weekly_title()`
   - checks for existing open weekly issue via GitHub Search API (`issue_exists`) to ensure idempotency
   - creates issue via GitHub REST API with labels `github-trending` and `weekly-report`
-- Required environment variables for publishing:
-  - `GITHUB_TOKEN`
+- Publishing reads `.env` automatically via `python-dotenv`.
+- Required variables for publishing:
+  - `DEPLOY_TOKEN`
   - `GITHUB_REPOSITORY`
 
 ### 4) Tests and fixtures

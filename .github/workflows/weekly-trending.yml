@@ -29,10 +29,10 @@ jobs:
         run: uv sync --dev
 
       - name: Fetch weekly trending
-        run: uv run python scripts/fetch_trending.py --top 20 --out /tmp/trending.json
+        run: uv run python -m scripts.fetch_trending --top 20 --out /tmp/trending.json
 
       - name: Create weekly issue
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
-        run: uv run python scripts/create_issue.py --input /tmp/trending.json --top 20
+        run: uv run python -m scripts.create_issue --input /tmp/trending.json --top 20

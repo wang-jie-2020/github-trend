@@ -5,6 +5,8 @@ from dataclasses import dataclass
 from html.parser import HTMLParser
 from urllib.request import Request, urlopen
 
+from dotenv import load_dotenv
+
 TRENDING_URL = "https://github.com/trending?since=weekly"
 
 
@@ -128,6 +130,8 @@ def fetch_html():
 
 
 def main():
+    load_dotenv()
+
     parser = argparse.ArgumentParser()
     parser.add_argument("--top", type=int, default=20)
     parser.add_argument("--out", required=True)

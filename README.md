@@ -32,11 +32,18 @@ uv sync --dev
 ### 本地执行完整流程
 
 ```bash
-uv run python scripts/fetch_trending.py --top 20 --out /tmp/trending.json
-GITHUB_TOKEN=<token> GITHUB_REPOSITORY=<owner/repo> uv run python scripts/create_issue.py --input /tmp/trending.json --top 20
+uv run python -m scripts.fetch_trending --top 20 --out /tmp/trending.json
+uv run python -m scripts.create_issue --input /tmp/trending.json --top 20
 ```
 
-> `GITHUB_TOKEN` 需要具备创建 issue 权限；`GITHUB_REPOSITORY` 形如 `owner/repo`。
+默认会自动读取仓库根目录 `.env`。
+
+```dotenv
+DEPLOY_TOKEN=your_github_token
+GITHUB_REPOSITORY=owner/repo
+```
+
+> `DEPLOY_TOKEN` 需要具备创建 issue 权限；`GITHUB_REPOSITORY` 形如 `owner/repo`。
 
 ## 测试
 
@@ -53,4 +60,4 @@ uv run pytest tests/test_render_markdown.py -q
 - 定时：每周一 UTC 01:00（`0 1 * * 1`）
 - 也支持 `workflow_dispatch` 手动触发
 
-默认使用 `secrets.GITHUB_TOKEN` 和 `${{ github.repository }}` 创建 issue。
+默认使用 `secrets.DEPLOY_TOKEN` 和 `${{ github.repository }}` 创建 issue。
