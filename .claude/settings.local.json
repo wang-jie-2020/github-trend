@@ -19,7 +19,10 @@
       "Bash(uv --version)",
       "Bash(uv lock *)",
       "Bash(uv sync *)",
-      "Bash(uv run *)"
+      "Bash(uv run *)",
+      "Bash(mkdir -p docs/archive)",
+      "Bash(mv docs/superpowers/* docs/archive/)",
+      "Bash(rmdir docs/superpowers)"
     ]
   }
 }
