@@ -22,7 +22,8 @@
       "Bash(uv run *)",
       "Bash(mkdir -p docs/archive)",
       "Bash(mv docs/superpowers/* docs/archive/)",
-      "Bash(rmdir docs/superpowers)"
+      "Bash(rmdir docs/superpowers)",
+      "mcp__codegraph__codegraph_context"
     ]
   }
 }
