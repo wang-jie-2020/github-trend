@@ -1,0 +1,72 @@
+# AGENTS.md
+
+This file provides guidance to coding agents when working with code in this repository.
+
+## Project goal
+- Automate a weekly GitHub Trending report and publish it as a deduplicated GitHub Issue.
+
+## Common commands
+
+### Run the weekly pipeline locally
+```bash
+uv sync --dev
+uv run python -m scripts.fetch_trending --top 20 --out /tmp/trending.json
+uv run python -m scripts.create_issue --input /tmp/trending.json --top 20
+```
+
+### Run tests
+```bash
+uv run pytest -q
+uv run pytest tests/test_fetch_trending.py -q
+uv run pytest tests/test_render_markdown.py -q
+uv run pytest tests/test_render_markdown.py::test_build_weekly_title_uses_iso_week -q
+```
+
+### Build / lint
+- No dedicated build or lint command is configured in this repository yet.
+- Primary verification is test execution (`pytest`).
+- Dependency management uses `uv` (`uv.lock`, `uv sync`).
+
+## Architecture overview
+
+### Workflow orchestration
+- `.github/workflows/weekly-trending.yml` schedules execution at `0 1 * * 1` (UTC Monday) and supports `workflow_dispatch`.
+- The workflow runs two scripts in order: fetch trending data, then create/publish the issue.
+
+### Data acquisition and normalization
+- `scripts/fetch_trending.py` fetches `https://github.com/trending?since=weekly` and parses HTML using `html.parser.HTMLParser`.
+- `TrendingParser` extracts repository metadata from `article.Box-row` blocks.
+- `normalize_items()` converts parsed rows to a stable schema used downstream:
+  - `source`, `rank`, `repo`, `url`, `summary`, `language`, `stars`, `forks`
+- Output is written as JSON (`--out`) for the publisher step.
+
+### Rendering and publishing
+- `scripts/render_markdown.py` is a pure renderer that builds the final issue markdown table/body.
+- `scripts/create_issue.py`:
+  - builds ISO-week title via `build_weekly_title()`
+  - checks for existing open weekly issue via GitHub Search API (`issue_exists`) to ensure idempotency
+  - creates issue via GitHub REST API with labels `github-trending` and `weekly-report`
+- Publishing reads `.env` automatically via `python-dotenv`.
+- Required variables for publishing:
+  - `DEPLOY_TOKEN`
+  - `GITHUB_REPOSITORY`
+
+### Tests and fixtures
+- `tests/test_fetch_trending.py` validates parser extraction and normalization against fixtures.
+- `tests/test_render_markdown.py` validates markdown output and weekly title/search-query helpers.
+- `tests/fixtures/trending_sample.html` and `tests/fixtures/trending_expected.json` provide deterministic parser expectations.
+
+## Design references
+- 领域模型：`CONTEXT.md`
+- Spec：`docs/specs/weekly-trending-report.md`
+- ADR：`docs/adr/`
+
+## Agent skills
+
+### Issue tracker
+
+Issues tracked as local markdown under `.scratch/<feature>/`. See `docs/agents/issue-tracker.md`.
+
+### Domain docs
+
+Single-context — `CONTEXT.md` + `docs/adr/`. See `docs/agents/domain.md`.
