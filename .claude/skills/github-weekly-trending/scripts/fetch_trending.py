@@ -80,7 +80,10 @@ class TrendingParser(HTMLParser):
         if not text:
             return
         if self._in_description:
-            self._current.description = text
+            if self._current.description:
+                self._current.description += " " + text
+            else:
+                self._current.description = text
         elif self._in_language:
             self._current.language = text
         elif self._capture_stars:
