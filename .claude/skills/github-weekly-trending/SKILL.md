@@ -28,7 +28,7 @@ Same-day reruns reuse and overwrite the same directory.
 ### 2. Collect metadata
 
 ```bash
-uv run python -m scripts.collect_trending_metadata --top 20 --out-dir htmls/github-weekly-trending-YYYYMMDD
+uv run python .claude/skills/github-weekly-trending/scripts/collect_trending_metadata.py --top 20 --out-dir htmls/github-weekly-trending-YYYYMMDD
 ```
 
 Use `--top 3` for smoke tests. The collector discovers Trending repos, enriches with GitHub API metadata, prefers `gh api` over token REST, and fails clearly if no route works.
@@ -47,21 +47,14 @@ Do not call an external Claude API script — this session does the reading and 
 ### 4. Render HTML
 
 ```bash
-uv run python -m scripts.render_trending_html --input-dir htmls/github-weekly-trending-YYYYMMDD
+uv run python .claude/skills/github-weekly-trending/scripts/render_trending_html.py --input-dir htmls/github-weekly-trending-YYYYMMDD
 ```
 
 **Completion:** `trending.html` exists and was generated without contract validation errors.
 
-### 5. Verify
+### 5. Report
 
-Run contract tests:
-
-```bash
-uv run python -m pytest tests/test_trending_html_contracts.py -q
-uv run python -m pytest tests/test_render_trending_html.py -q
-```
-
-**Completion:** all tests pass. Report the final `trending.html` path. When appropriate, suggest opening the file in a browser.
+**Completion:** Report the final `trending.html` path. When appropriate, suggest opening the file in a browser.
 
 ## Visual spec
 
@@ -73,14 +66,3 @@ Full-screen split-card reader. One repo per card.
 - Light low-saturation palette, white card surface, subtle hairline borders, rounded corners, restrained system typography.
 
 Rejects: flat lists, dense tables, dark terminal styling, Bento grids, warm editorial serif, AI-gradient clichés.
-
-## Tests
-
-```bash
-uv run python -m pytest tests/test_trending_html_contracts.py -q
-uv run python -m pytest tests/test_collect_trending_metadata.py -q
-uv run python -m pytest tests/test_render_trending_html.py -q
-uv run python -m pytest -q
-```
-
-Unit tests must not call the live GitHub API.
