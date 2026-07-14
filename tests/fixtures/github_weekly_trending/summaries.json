@@ -1,0 +1,30 @@
+{
+  "summaries": [
+    {
+      "repo": "owner1/repo1",
+      "readme_status": "ok",
+      "readme_error": null,
+      "summary": "Repo one automates a focused development workflow.",
+      "why_it_matters": "It packages a useful workflow that is trending this week.",
+      "best_for": "Developers evaluating automation tools.",
+      "key_points": [
+        "Provides a simple command-line workflow.",
+        "Integrates with common developer tooling.",
+        "Has clear metadata for quick evaluation."
+      ]
+    },
+    {
+      "repo": "owner2/repo2",
+      "readme_status": "unreadable",
+      "readme_error": "README returned 404 during dry run.",
+      "summary": "Repo two could not be summarized from README content.",
+      "why_it_matters": "It is still listed on Trending, but README context was unavailable.",
+      "best_for": "Readers who want to inspect the repository manually.",
+      "key_points": [
+        "Trending metadata was collected successfully.",
+        "README content was not available for summarization.",
+        "Manual repository review is recommended."
+      ]
+    }
+  ]
+}

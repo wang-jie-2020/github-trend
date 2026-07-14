@@ -1,0 +1,43 @@
+{
+  "source_url": "https://github.com/trending?since=weekly",
+  "since": "weekly",
+  "collected_at": "2026-07-14T00:00:00Z",
+  "top": 2,
+  "repositories": [
+    {
+      "rank": 1,
+      "repo": "owner1/repo1",
+      "url": "https://github.com/owner1/repo1",
+      "trending_description": "Trending description 1",
+      "api_description": "API description 1",
+      "language": "Python",
+      "stars": 1234,
+      "forks": 56,
+      "topics": ["cli", "automation"],
+      "license": "MIT",
+      "homepage": "https://example.com/repo1",
+      "pushed_timestamp": "2026-07-13T12:00:00Z",
+      "latest_release": {
+        "name": "v1.0.0",
+        "tag_name": "v1.0.0",
+        "url": "https://github.com/owner1/repo1/releases/tag/v1.0.0",
+        "published_at": "2026-07-12T12:00:00Z"
+      }
+    },
+    {
+      "rank": 2,
+      "repo": "owner2/repo2",
+      "url": "https://github.com/owner2/repo2",
+      "trending_description": "Trending description 2",
+      "api_description": "API description 2",
+      "language": "TypeScript",
+      "stars": 987,
+      "forks": 12,
+      "topics": [],
+      "license": null,
+      "homepage": null,
+      "pushed_timestamp": "2026-07-10T08:30:00Z",
+      "latest_release": null
+    }
+  ]
+}
