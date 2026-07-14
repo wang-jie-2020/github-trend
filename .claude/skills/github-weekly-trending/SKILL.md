@@ -28,7 +28,7 @@ Same-day reruns reuse and overwrite the same directory.
 ### 2. Collect metadata
 
 ```bash
-uv run python .claude/skills/github-weekly-trending/scripts/collect_trending_metadata.py --top 20 --out-dir htmls/github-weekly-trending-YYYYMMDD
+uv run python scripts/collect_trending_metadata.py --top 20 --out-dir htmls/github-weekly-trending-YYYYMMDD
 ```
 
 Use `--top 3` for smoke tests. The collector discovers Trending repos, enriches with GitHub API metadata, prefers `gh api` over token REST, and fails clearly if no route works.
@@ -47,7 +47,7 @@ Do not call an external Claude API script — this session does the reading and 
 ### 4. Render HTML
 
 ```bash
-uv run python .claude/skills/github-weekly-trending/scripts/render_trending_html.py --input-dir htmls/github-weekly-trending-YYYYMMDD
+uv run python scripts/render_trending_html.py --input-dir htmls/github-weekly-trending-YYYYMMDD
 ```
 
 **Completion:** `trending.html` exists and was generated without contract validation errors.
